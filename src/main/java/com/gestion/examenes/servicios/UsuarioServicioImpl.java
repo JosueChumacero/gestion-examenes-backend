@@ -26,8 +26,28 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private RolRepositorio rolRepositorio;
 
     @Override
-    public Usuario guardarUsuario(Usuario usuario, Set<UsuarioRol> usuarioRoles) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Usuario guardarUsuario(Usuario usuario, Set<UsuarioRol> usuarioRoles) throws Exception{
+        Usuario usuarioLocal= usuarioRepositorio.findByUsername(usuario.getUsername());
+        if (usuarioLocal!=null){
+            throw  new Exception("Usuario ya existe");
+        }else {
+            for (UsuarioRol usuarioRole : usuarioRoles) {
+                rolRepositorio.save(usuarioRole.getRol());
+            }
+            usuario.getUsuarioRoles().addAll(usuarioRoles);
+            usuarioLocal = usuarioRepositorio.save(usuario);
+        }
+        return  usuarioLocal;
+    }
+
+    @Override
+    public Usuario obtenerUsaario(String username) {
+        return usuarioRepositorio.findByUsername(username);
+    }
+
+    @Override
+    public void elimianrUsuario(Long usuarioId) {
+        usuarioRepositorio.deleteById(usuarioId);
     }
 
 }

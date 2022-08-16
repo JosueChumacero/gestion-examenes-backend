@@ -13,7 +13,11 @@ import java.util.Set;
  * @author tony_
  */
 public interface UsuarioServicio {
+
+    public Usuario guardarUsuario(Usuario usuario, Set<UsuarioRol> usuarioRoles) throws Exception;
     
-    public Usuario guardarUsuario(Usuario usuario, Set<UsuarioRol> usuarioRoles);
+    public Usuario obtenerUsaario(String username);
     
+    public void elimianrUsuario(Long usuarioId);
+
 }

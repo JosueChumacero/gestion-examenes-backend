@@ -11,6 +11,7 @@ import com.gestion.examenes.servicios.UsuarioServicio;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/usuarios")
+@CrossOrigin("*")
 public class UsuarioControlador {
     
     @Autowired
@@ -41,6 +43,7 @@ public class UsuarioControlador {
         UsuarioRol usuarioRol=new UsuarioRol();
         usuarioRol.setUsuario(usuario);
         usuarioRol.setRol(rol);
+        roles.add(usuarioRol);
         return usuarioServicio.guardarUsuario(usuario, roles);
     }
     
